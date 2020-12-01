@@ -1,9 +1,8 @@
 # instrument-rent
-On-demand instrument renting platform's web-side repository.
+On-demand instrument renting platform repository.
 
 ## Dependencies 
-- Thymeleaf
-- MongoDB
+- reactive MongoDB
 - devtools
-- Starter Web
+- reactive Web
 
