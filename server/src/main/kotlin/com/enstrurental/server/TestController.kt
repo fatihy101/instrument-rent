@@ -2,9 +2,7 @@ package com.enstrurental.server
 
 import org.springframework.http.MediaType
 import org.springframework.stereotype.Controller
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.ResponseBody
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.*
 import reactor.core.publisher.Flux
 import reactor.core.publisher.Mono
 
@@ -19,9 +17,9 @@ class TestController {
         return "hello world"
     }
 
-    @GetMapping("/mono-data")
-    fun monoData() : Mono<String>
+    @GetMapping("/{message}")
+    fun monoData(@RequestBody @PathVariable message: String) : Mono<String>
     {
-        return Mono.just("Hello from mono")
+        return Mono.just(message + "\n")
     }
 }
