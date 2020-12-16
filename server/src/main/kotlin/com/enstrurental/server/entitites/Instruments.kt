@@ -6,7 +6,7 @@ import org.springframework.data.mongodb.core.mapping.Document
 import java.sql.Timestamp
 
 @Document
-data class Instrument(
+data class Instruments(
         @Id
         val id: Int,
         val name: String,

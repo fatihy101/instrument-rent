@@ -1,13 +1,19 @@
 package com.enstrurental.server.entitites
 
-import org.springframework.data.mongodb.repository.MongoRepository
+import org.springframework.data.mongodb.repository.ReactiveMongoRepository
+import org.springframework.stereotype.Repository
 
-interface UserRepository: MongoRepository<User, String>
+@Repository
+interface UserRepository: ReactiveMongoRepository<Users, String>
 
-interface RenterRepository: MongoRepository<Renter, String>
+@Repository
+interface RenterRepository: ReactiveMongoRepository<Renters, String>
 
-interface OrderRepository: MongoRepository<Order, Int>
+@Repository
+interface OrderRepository: ReactiveMongoRepository<Orders, Int>
 
-interface InstrumentRepository: MongoRepository<Instrument, String>{
+@Repository
+interface InstrumentRepository: ReactiveMongoRepository<Instruments, String>{
     // fun findByCategory()
+
 }
