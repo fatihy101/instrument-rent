@@ -10,7 +10,7 @@ data class Users (
         val email: String,
         val name: String,
         val surname: String,
-        val address: Address,
+        val address: Address?,
         val phone_number: String,
         val credit_card : CreditCard?
         )

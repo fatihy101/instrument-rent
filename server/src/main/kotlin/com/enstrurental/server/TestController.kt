@@ -17,9 +17,4 @@ class TestController {
         return "hello world"
     }
 
-    @GetMapping("/{message}")
-    fun monoData(@RequestBody @PathVariable message: String) : Mono<String>
-    {
-        return Mono.just("Your message: $message")
-    }
 }
