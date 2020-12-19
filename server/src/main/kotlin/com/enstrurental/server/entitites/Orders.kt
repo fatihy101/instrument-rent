@@ -11,7 +11,7 @@ data class Orders(
         val id: Int,
         val order_date: Timestamp = Timestamp(System.currentTimeMillis()),
         val instrument: Instruments,
-        val user : Users,
+        val user : Clients,
         val renter: Renters,
         var delivery_type: String,
         var address: Addresses,

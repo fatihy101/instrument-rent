@@ -4,7 +4,7 @@ import org.springframework.data.mongodb.repository.ReactiveMongoRepository
 import org.springframework.stereotype.Repository
 
 @Repository
-interface UsersRepository: ReactiveMongoRepository<Users, String>
+interface ClientsRepository: ReactiveMongoRepository<Clients, String>
 
 @Repository
 interface RentersRepository: ReactiveMongoRepository<Renters, String>
