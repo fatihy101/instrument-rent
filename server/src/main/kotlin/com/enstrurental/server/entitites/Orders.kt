@@ -1,22 +1,25 @@
 package com.enstrurental.server.entitites
 
+import org.bson.types.Binary
 import org.springframework.data.annotation.Id
 import org.springframework.data.mongodb.core.mapping.Document
 import java.sql.Timestamp
-import javax.sound.midi.Instrument
 
 @Document
 data class Orders(
         @Id
         val id: Int,
-        val order_date: Timestamp,
-        val instrument: Instrument,
-        val users : Users,
-        val renters: Renters,
-        val delivery_type: String,
-        val addresses: Addresses,
-        val total_rented_days: Int,
-        val tracking_number: String?,
-        val estimated_delivery_date : Timestamp?,
+        val order_date: Timestamp = Timestamp(System.currentTimeMillis()),
+        val instrument: Instruments,
+        val user : Users,
+        val renter: Renters,
+        var delivery_type: String,
+        var address: Addresses,
+        var is_rental: Boolean = true,
+        var initial_photos: List<Binary>?,
+        var last_photos: List<Binary>?,
+        var total_rented_days: Int?,
+        var tracking_number: String?,
+        var estimated_delivery_date : Timestamp?,
         val total_price: Double
         )

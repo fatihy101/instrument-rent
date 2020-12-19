@@ -9,18 +9,17 @@ import java.sql.Timestamp
 data class Instruments(
         @Id
         val id: Int,
+        val added_date: Timestamp = Timestamp(System.currentTimeMillis()),
         var name: String,
         var category: String,
         var description: String?,
-        val register_date: Timestamp = Timestamp(System.currentTimeMillis()),
         var availability: Boolean = true,
         var unavailable_due_date: Timestamp?,
-        val price_by_day: Double,
-        val deposit_price: Double,
-        val photos: List<Binary>?,
-        val open_to_sell: Boolean = false,
-        val is_used: Boolean = false,
+        var price_by_day: Double,
+        var deposit_price: Double?,
+        var photos: List<Binary>?,
+        var open_to_sell: Boolean = false,
+        var is_used: Boolean = false,
         var available_delivery_types : List<String>,
         var tags :List<String>
-
         )
