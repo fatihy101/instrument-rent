@@ -14,7 +14,7 @@ data class Orders(
         val users : Users,
         val renters: Renters,
         val delivery_type: String,
-        val address: Address,
+        val addresses: Addresses,
         val total_rented_days: Int,
         val tracking_number: String?,
         val estimated_delivery_date : Timestamp?,

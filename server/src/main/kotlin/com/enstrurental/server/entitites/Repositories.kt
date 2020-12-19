@@ -4,16 +4,16 @@ import org.springframework.data.mongodb.repository.ReactiveMongoRepository
 import org.springframework.stereotype.Repository
 
 @Repository
-interface UserRepository: ReactiveMongoRepository<Users, String>
+interface UsersRepository: ReactiveMongoRepository<Users, String>
 
 @Repository
-interface RenterRepository: ReactiveMongoRepository<Renters, String>
+interface RentersRepository: ReactiveMongoRepository<Renters, String>
 
 @Repository
-interface OrderRepository: ReactiveMongoRepository<Orders, Int>
+interface OrdersRepository: ReactiveMongoRepository<Orders, Int>
 
 @Repository
-interface InstrumentRepository: ReactiveMongoRepository<Instruments, String>{
-    // fun findByCategory()
+interface InstrumentsRepository: ReactiveMongoRepository<Instruments, String>
 
-}
+@Repository
+interface AddressesRepository: ReactiveMongoRepository<Addresses, Int>
