@@ -2,6 +2,7 @@ package com.enstrurental.server.entitites
 
 import org.springframework.data.mongodb.repository.ReactiveMongoRepository
 import org.springframework.stereotype.Repository
+import reactor.core.publisher.Flux
 
 @Repository
 interface ClientsRepository: ReactiveMongoRepository<Clients, String>
@@ -16,4 +17,6 @@ interface OrdersRepository: ReactiveMongoRepository<Orders, Int>
 interface InstrumentsRepository: ReactiveMongoRepository<Instruments, String>
 
 @Repository
-interface AddressesRepository: ReactiveMongoRepository<Addresses, Int>
+interface AddressesRepository: ReactiveMongoRepository<Addresses, Int>{
+    fun findAddressesByUid(uid: String) : Flux<Addresses>
+}

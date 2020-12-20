@@ -7,7 +7,7 @@ import org.springframework.data.mongodb.core.mapping.Document
 data class Addresses(
         @Id
         val address_id: Int,
-        val user_id: String,
+        val uid: String,
         var address_title: String,
         var city: String,
         var state: String,
