@@ -1,15 +1,18 @@
 package com.enstrurental.server.entitites
 
 import org.bson.types.Binary
+import org.springframework.data.annotation.CreatedDate
 import org.springframework.data.annotation.Id
 import org.springframework.data.mongodb.core.mapping.Document
 import java.sql.Timestamp
+import java.time.LocalDateTime
 
 @Document
 data class Orders(
         @Id
         val id: Int,
-        val order_date: Timestamp = Timestamp(System.currentTimeMillis()),
+        @CreatedDate
+        val order_date: LocalDateTime = LocalDateTime.now(),
         val instrument: Instruments,
         val user : Clients,
         val renter: Renters,

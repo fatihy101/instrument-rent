@@ -35,7 +35,7 @@ class ClientsController(private val clientsRepository: ClientsRepository) {
             .defaultIfEmpty(ResponseEntity.notFound().build())
 
 
-    @PutMapping("update_phone/{id}")
+    @PutMapping("/{id}/update_phone/")
     fun updatePhoneNumber(@PathVariable id: String, @RequestBody client_updated: Clients) : Mono<ResponseEntity<Clients>>
     {
         return clientsRepository.findById(id)
