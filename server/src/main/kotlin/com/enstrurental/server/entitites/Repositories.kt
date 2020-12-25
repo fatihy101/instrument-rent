@@ -14,7 +14,9 @@ interface RentersRepository: ReactiveMongoRepository<Renters, String>
 interface OrdersRepository: ReactiveMongoRepository<Orders, Int>
 
 @Repository
-interface InstrumentsRepository: ReactiveMongoRepository<Instruments, String>
+interface InstrumentsRepository: ReactiveMongoRepository<Instruments, String>{
+    fun findInstrumentsByCategory(category: String) : Flux<Instruments>
+}
 
 @Repository
 interface AddressesRepository: ReactiveMongoRepository<Addresses, Int>{
