@@ -47,7 +47,7 @@
                 color="accent"
                 fab
                 absolute
-                bottom
+                top
                 right
               >
                 <v-icon>mdi-magnify</v-icon>
@@ -62,12 +62,23 @@
 
     <v-main id="main_view">
       <v-container fluid>
-        <v-sheet
-          min-height="70vh"
-          rounded="xl"
-          class="mt-1" >
-          <router-view></router-view>
-        </v-sheet>
+      <v-row>
+        <!-- Sidebar -->
+        <v-col cols="2">
+          <Login/>
+        </v-col>
+        <!-- /Sidebar -->
+        <!-- main sheet, view -->
+        <v-col>
+          <v-sheet
+            min-height="70vh"
+            rounded="lg"
+            class="mt-2 mx-5 d-flex justify-center" >
+            <router-view></router-view>
+          </v-sheet>
+        </v-col>
+      </v-row>
+        <!-- /main sheet, view -->
       </v-container>
     </v-main>
 
@@ -111,6 +122,7 @@
 </template>
 
 <script>
+import Login from './components/Login.vue'
 
 export default {
   name: 'App',
@@ -128,7 +140,10 @@ export default {
       'mdi-linkedin',
       'mdi-instagram'
     ]
-  })
+  }),
+  components: {
+    Login
+  }
 }
 </script>
 <style lang="scss">
