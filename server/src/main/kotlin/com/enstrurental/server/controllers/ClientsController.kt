@@ -10,6 +10,7 @@ import reactor.core.publisher.Mono
 
 @RestController
 @RequestMapping("clients")
+@CrossOrigin(origins = ["http://localhost:8080"])
 class ClientsController(private val clientsRepository: ClientsRepository) {
 
     @GetMapping("/")
