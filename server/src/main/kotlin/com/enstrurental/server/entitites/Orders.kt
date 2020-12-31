@@ -14,7 +14,7 @@ data class Orders(
         @CreatedDate
         val order_date: LocalDateTime = LocalDateTime.now(),
         val instrument: Instruments,
-        val user : Clients,
+        val client : Clients,
         val renter: Renters,
         var delivery_type: String,
         var address: Addresses,
