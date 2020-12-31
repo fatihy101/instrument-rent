@@ -28,11 +28,12 @@
           <!-- Navbar -->
           <v-row no-gutters class="mb-2">
             <v-col class="d-flex justify-center">
-
-              <v-btn target="_blank" text class="mr-2" v-for="(item, index) in menuItems" :key="index">
-                <span class="mr-1">{{item.title}}</span>
-                <v-icon>{{item.icon}}</v-icon>
-              </v-btn>
+              <router-link v-for="(item, index) in menuItems" :key="index" :to="item.path">
+                <v-btn target="_blank" text class="mr-2" >
+                  <span class="mr-1">{{item.title}}</span>
+                  <v-icon>{{item.icon}}</v-icon>
+                </v-btn>
+              </router-link>
 
             </v-col>
           </v-row>
@@ -62,9 +63,9 @@ export default {
   name: 'Header',
   data: () => ({
     menuItems: [
-      { title: 'Ana Sayfa', path: '/home', icon: 'mdi-home' },
-      { title: 'Hakkımızda', path: '/signup', icon: 'mdi-information-outline' },
-      { title: 'Nasıl çalışır?', path: '/signin', icon: 'mdi-head-question-outline' }
+      { title: 'Ana Sayfa', path: '/', icon: 'mdi-home' },
+      { title: 'Hakkımızda', path: '/hakkimizda', icon: 'mdi-information-outline' },
+      { title: 'Nasıl çalışır?', path: '/nasil-calisir', icon: 'mdi-head-question-outline' }
     ]
   })
 

@@ -14,7 +14,7 @@ const routes = [
     component: Home
   },
   {
-    path: '/about',
+    path: '/hakkimizda',
     name: 'About',
     component: About
   }
