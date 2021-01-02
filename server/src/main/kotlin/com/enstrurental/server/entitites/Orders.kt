@@ -24,5 +24,6 @@ data class Orders(
         var total_rented_days: Int?,
         var tracking_number: String?,
         var estimated_delivery_date : Timestamp?,
-        val total_price: Double
+        val total_price: Double,
+        var archive: Boolean = false
         )
