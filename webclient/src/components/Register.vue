@@ -3,19 +3,21 @@
     <span v-if="show">
       <v-sheet rounded="lg" class="d-flex justify-center mt-2">
             <v-form lazy-validation @submit.prevent="register" class="mx-n5">
-              <p v-if="errors.length"  style="color:red; word-wrap:break-word;">
+              <p v-if="errors.length"  style="color:pink; word-wrap:break-word;">
                 <ul style="list-style-type:none;">
                   <li v-for="(error, index) in errors" :key="index">{{ error }}</li>
                 </ul>
               </p>
+                <!--TODO: Email format check -->
                 <v-text-field label="E-posta" v-model="email"></v-text-field>
                 <v-text-field label="Ad" type="text" v-model="name"></v-text-field>
                 <v-text-field label="Soyad" type="text" v-model="surname"></v-text-field>
-                <v-text-field label="Telefon No" type="text" v-model="phone_number"></v-text-field>
+                <birthdayPicker @birthdayDateChange="date = $event" />
+                <v-text-field label="Telefon No" placeholder="+90" type="text" v-model="phone_number"></v-text-field>
                 <v-text-field label="Parola" type="password" v-model="password"></v-text-field>
                 <v-text-field label="Parola tekrarı" type="password" v-model="password_re"></v-text-field>
                 <!--TODO: Password strength check-->
-                <v-btn color="success" type="submit" class="ml-5 my-5" :disabled="is_button_disabled">
+                <v-btn color="success darken-2" :loading="loading" type="submit" class="ml-5 my-5">
                     Kaydol <v-icon>mdi-account-check</v-icon>
                 </v-btn>
                 <v-btn color="accent" @click="show = !show" class="ml-5 my-5 d-flex" >
@@ -31,11 +33,13 @@
 import firebase from 'firebase/app'
 import 'firebase/auth'
 import axios from 'axios'
+import birthdayPicker from './birthdayPicker.vue'
 
 export default {
   name: 'Register',
   data: () => ({
     errors: [],
+    loading: false,
     show: true,
     email: null,
     name: null,
@@ -46,9 +50,9 @@ export default {
   }),
   methods: {
     async register () {
+      this.loading = true
       if (this.checkForm()) {
-        this.formValues = [this.name, this.surname, this.email, this.password, this.password_re, this.phone_number]
-
+        const formValues = [this.name, this.surname, this.email, this.password, this.password_re, this.phone_number]
         // Firebase
         await firebase.auth().createUserWithEmailAndPassword(this.email, this.password)
           .then(_ => console.log('first succession.')).catch(error => console.log(error))
@@ -56,6 +60,7 @@ export default {
         const data = {
           id: user.uid,
           email: this.email,
+          birthday_date: this.date,
           name: this.name,
           surname: this.surname,
           phone_number: this.phone_number
@@ -64,17 +69,23 @@ export default {
         await axios.post('http://localhost:4001/clients/save', data, { timeout: 1000 })
           .then((response) => {
             alert('Kaydınız başarıyla tamamlandı.')
-            for (this.value in this.formValues) this.value = null
+            // To stop loading animation.
+            this.loading = false
+            // Set all the form values as null.
+            for (this.value in formValues) this.value = null
           }).catch(error => {
             console.log(`Server err: ${error}`)
             user.delete().then(function () {
               this.errors.push('Hesabınız sunucuda oluşan bir hatadan dolayı oluşturulamadı. Daha sonra tekrar deneyin.')
+              this.loading = false
             }).catch(error => { // It's very hard to occur but somehow it occurs, proabably something is wrong with firebase
               console.log(`Code 1: ${error}`)
               this.errors.push('Beklenmeyen bir hata oluştu. Kod: 1')
+              this.loading = false
             })
           })
       }
+      this.loading = false
     },
     passwordCheck () {
       if (this.password === null || this.password_re === null) {
@@ -112,6 +123,9 @@ export default {
         }
       }
     }
+  },
+  components: {
+    birthdayPicker
   }
 
 }
