@@ -7,8 +7,8 @@
       <v-row>
         <!-- Sidebar -->
         <v-col cols="2">
-          <Login/>
-          <Register/>
+          <Login @visibilityEvent="show_login = $event" :visibility="show_login"/>
+          <Register :visibility="!show_login"/>
         </v-col>
         <!-- /Sidebar -->
         <!-- main sheet, view -->
@@ -38,6 +38,7 @@ export default {
   name: 'App',
 
   data: () => ({
+    show_login: true
   }),
   components: {
     Login,
@@ -54,5 +55,19 @@ export default {
   background-color:#450d82;
   color: #fff;
   }
+
+  /* Enter and leave animations can use different */
+/* durations and timing functions.              */
+.slide-enter-active {
+  transition: all .4s ease;
+}
+.slide-leave-active {
+  transition: all .2s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+}
+.slide-enter, .slide-leave-to
+/* .slide-fade-leave-active below version 2.1.8 */ {
+  transform: translateX(10px);
+  opacity: 0;
+}
 
 </style>
