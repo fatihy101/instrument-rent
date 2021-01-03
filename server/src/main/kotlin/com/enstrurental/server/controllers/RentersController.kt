@@ -12,7 +12,7 @@ import reactor.core.publisher.Mono
 /* [UNTESTED] TODO: Test */
 @RestController
 @RequestMapping("renters")
-@CrossOrigin(origins = ["http://localhost:8080"])
+@CrossOrigin(origins = ["http://localhost:4001"])
 
 class RentersController(private val rentersRepository: RentersRepository) {
 
