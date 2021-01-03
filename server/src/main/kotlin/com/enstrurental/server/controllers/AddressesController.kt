@@ -12,7 +12,7 @@ TODO: add update address*/
 
 @RestController
 @RequestMapping("addresses")
-@CrossOrigin(origins = ["http://localhost:4001"])
+@CrossOrigin(origins = ["http://localhost:8080"])
 class AddressesController(val addressesRepository: AddressesRepository) {
 
     @GetMapping("/")

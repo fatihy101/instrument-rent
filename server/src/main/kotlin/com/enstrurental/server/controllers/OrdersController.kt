@@ -10,7 +10,7 @@ import reactor.core.publisher.Mono
 
 @RestController
 @RequestMapping("orders")
-@CrossOrigin(origins = ["http://localhost:4001"])
+@CrossOrigin(origins = ["http://localhost:8080"])
 
 class OrdersController(val ordersRepository: OrdersRepository) {
     /* TODO operations:
