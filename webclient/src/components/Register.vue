@@ -1,7 +1,17 @@
 <template>
   <transition name="slide">
-    <span v-if="show">
-      <v-sheet rounded="lg" class="d-flex justify-center mt-2">
+    <v-sheet v-if="!$store.getters.getLoginDisplay" rounded="lg" class="d-flex justify-center mt-2" dark color="primary lighten-1" elevation="15">
+      <v-container>
+        <v-row dense>
+          <v-col>
+            <v-btn class="mb-3" icon color="primary" @click="$store.commit('changeLoginDisplay')">
+              <v-icon color="accent"> mdi-arrow-left-thick </v-icon>
+            </v-btn>
+            <v-divider></v-divider>
+          </v-col>
+        </v-row>
+        <v-row>
+          <v-col class="d-flex justify-center">
             <v-form lazy-validation @submit.prevent="register" class="mx-n5">
               <p v-if="errors.length"  style="color:pink; word-wrap:break-word;">
                 <ul style="list-style-type:none;">
@@ -20,12 +30,11 @@
                 <v-btn color="success darken-2" :loading="loading" type="submit" class="ml-5 my-5">
                     Kaydol <v-icon>mdi-account-check</v-icon>
                 </v-btn>
-                <v-btn color="accent" @click="show = !show" class="ml-5 my-5 d-flex" >
-                    Test <v-icon>mdi-account-check</v-icon>
-                </v-btn>
             </v-form>
-        </v-sheet>
-    </span>
+          </v-col>
+        </v-row>
+      </v-container>
+    </v-sheet>
   </transition>
 </template>
 
@@ -40,7 +49,8 @@ export default {
   data: () => ({
     errors: [],
     loading: false,
-    show: true,
+    show: null,
+    date: null,
     email: null,
     name: null,
     surname: null,
@@ -130,25 +140,3 @@ export default {
 
 }
 </script>
-
-<style>
-/* Enter and leave animations can use different */
-/* durations and timing functions.              */
-.slide-enter-active {
-  transition: all .3s ease;
-}
-.slide-leave-active {
-  transition: all .5s cubic-bezier(1.0, 0.5, 0.8, 1.0);
-}
-.slide-enter, .slide-leave-to
-/* .slide-fade-leave-active below version 2.1.8 */ {
-  transform: translateX(10px);
-  opacity: 0;
-}
-
-.unmatching_pass{
-  border-color: red;
-  outline-color: red;
-  color: red;
-}
-</style>
