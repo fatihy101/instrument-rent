@@ -9,7 +9,7 @@ import reactor.core.publisher.Mono
 
 @RestController
 @RequestMapping("instruments")
-@CrossOrigin(origins = ["http://localhost:8080"])
+@CrossOrigin(origins = ["http://localhost:4001"])
 class InstrumentsController(val instrumentsRepository: InstrumentsRepository) {
 
     @GetMapping("/")
