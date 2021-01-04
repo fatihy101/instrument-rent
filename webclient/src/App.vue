@@ -6,22 +6,24 @@
       <v-container fluid>
       <v-row>
         <!-- Sidebar -->
-        <v-col cols="2">
+        <v-col lg="2" md="3" sm="4" xs="1">
           <Login @visibilityEvent="show_login = $event" :visibility="show_login"/>
           <Register :visibility="!show_login"/>
         </v-col>
         <!-- /Sidebar -->
         <!-- main sheet, view -->
-        <v-col>
-          <v-sheet
+        <v-col lg="10" md="9" sm="8" xs="11">
+          <v-sheet dark
             min-height="70vh"
             rounded="lg"
-            class="mt-2 mx-5 d-flex justify-center" >
+            class="mt-2 mx-5 d-flex justify-center"
+            color="primary lighten-1"
+            elevation="10" >
             <router-view></router-view>
           </v-sheet>
         </v-col>
-      </v-row>
         <!-- /main sheet, view -->
+      </v-row>
       </v-container>
     </v-main>
   <Footer/>

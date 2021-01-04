@@ -42,7 +42,7 @@
           <v-fab-transition>
               <v-btn
                 id="search_bar"
-                color="accent"
+                color="accent darken-2"
                 fab
                 absolute
                 top
