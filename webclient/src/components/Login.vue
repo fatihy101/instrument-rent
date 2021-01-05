@@ -1,6 +1,6 @@
 <template>
   <transition name="slide">
-    <v-sheet v-if="this.$store.getters.getLoginDisplay" rounded="lg" class="d-flex justify-center mt-2" dark color="primary lighten-1" elevation="15">
+    <v-sheet v-if="this.$store.getters.getLoginDisplay && !this.$store.getters.getLoggedIn" rounded="lg" class="d-flex justify-center mt-2" dark color="primary lighten-1" elevation="15">
         <v-form lazy-validation @submit.prevent="signInEvent" class="mx-n5">
             <v-text-field label="E-postanız" v-model="email"></v-text-field>
             <div>
@@ -32,16 +32,16 @@ export default {
   }),
   methods: {
     async signInEvent () {
-        await firebase.auth().signInWithEmailAndPassword(this.email, this.password)
+      await firebase.auth().signInWithEmailAndPassword(this.email, this.password)
         .catch(function (error) {
           var errorCode = error.code
           var errorMessage = error.message
           if (errorCode === 'auth/wrong-password') {
-            alert('Wrong password.');
+            alert('Wrong password.')
           } else {
-            alert(errorMessage);
+            alert(errorMessage)
           }
-          console.log(error);
+          console.log(error)
         })
     }
   }
