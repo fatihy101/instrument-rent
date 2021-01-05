@@ -9,6 +9,7 @@
         <v-col lg="2" md="3" sm="4" xs="1">
           <Login @visibilityEvent="show_login = $event" :visibility="show_login"/>
           <Register :visibility="!show_login"/>
+          <Profile/>
         </v-col>
         <!-- /Sidebar -->
         <!-- main sheet, view -->
@@ -35,6 +36,7 @@ import Footer from './components/Footer.vue'
 import Header from './components/Header.vue'
 import Login from './components/Login.vue'
 import Register from './components/Register.vue'
+import Profile from './components/Profile.vue'
 
 export default {
   name: 'App',
@@ -46,7 +48,8 @@ export default {
     Login,
     Header,
     Footer,
-    Register
+    Register,
+    Profile
   }
 }
 </script>

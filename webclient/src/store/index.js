@@ -5,21 +5,35 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    loginDisplay: true
+    loginDisplay: true,
+    loggedIn: true
   },
   mutations: {
-    changeLoginDisplay (state, payload) {
+    changeLoginDisplay (state) {
       state.loginDisplay = !state.loginDisplay
+    },
+    loggingIn (state) {
+      state.loggedIn = true
+    },
+    signOut (state) {
+      state.loggedIn = false
     }
   },
   actions: {
     changeLoginDisplay ({ commit }) {
       commit('changeLoginDisplay')
+    },
+    loggingIn ({ commit }) {
+      commit('loggingIn')
+    },
+    signOut ({ commit }) {
+      commit('signOut')
     }
   },
   modules: {
   },
   getters: {
-    getLoginDisplay: state => state.loginDisplay
+    getLoginDisplay: state => state.loginDisplay,
+    getLoggedIn: state => state.loggedIn
   }
 })

@@ -1,6 +1,6 @@
 <template>
   <transition name="slide">
-    <v-sheet v-if="!$store.getters.getLoginDisplay" rounded="lg" class="d-flex justify-center mt-2" dark color="primary lighten-1" elevation="15">
+    <v-sheet v-if="!$store.getters.getLoginDisplay && !this.$store.getters.getLoggedIn" rounded="lg" class="d-flex justify-center mt-2" dark color="primary lighten-1" elevation="15">
       <v-container>
         <v-row dense>
           <v-col>
