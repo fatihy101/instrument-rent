@@ -1,10 +1,10 @@
 <template>
   <transition name="slide">
     <v-sheet v-if="this.$store.getters.getLoginDisplay && !this.$store.getters.getLoggedIn" rounded="lg" class="d-flex justify-center mt-2" dark color="primary lighten-1" elevation="15">
-        <v-form lazy-validation @submit.prevent="signInEvent" class="mx-n5">
-            <v-text-field label="E-postanız" v-model="email"></v-text-field>
+        <v-form lazy-validation @submit.prevent="login()" class="mx-n5">
+            <v-text-field label="E-postanız" v-model.trim="email"></v-text-field>
             <div>
-                <v-text-field label="Parolanız" type="password" v-model="password"></v-text-field>
+                <v-text-field label="Parolanız" type="password" v-model.trim="password"></v-text-field>
                 <small class="d-flex justify-end subtitle-2 font-weight-light"><a href="#" style="color:white;">Parolamı Unuttum</a></small>
             </div>
             <v-btn color="primary" type="submit" class="ml-5 mt-7 mb-4 d-flex justify-center">
@@ -25,7 +25,6 @@ import 'firebase/auth'
 export default {
   name: 'Login',
   data: () => ({
-    show: null,
     email: null,
     password: null,
     errors: []
@@ -43,6 +42,12 @@ export default {
           }
           console.log(error)
         })
+    },
+    login () {
+      this.$store.dispatch('login', {
+        email: this.email,
+        password: this.password
+      })
     }
   }
 }

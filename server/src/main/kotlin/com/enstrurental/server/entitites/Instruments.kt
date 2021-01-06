@@ -9,6 +9,7 @@ import java.sql.Timestamp
 data class Instruments(
         @Id
         val id: Int,
+        val renter_id: String,
         val added_date: Timestamp = Timestamp(System.currentTimeMillis()),
         var name: String,
         var category: String?,
