@@ -32,7 +32,7 @@
           <!-- Log Out Button -->
           <v-row class="ml-n5 mb-1">
             <v-col>
-              <v-btn color="error darken-1" class="ml-5 my-5"><v-icon>mdi-logout</v-icon> Çıkış Yap </v-btn>
+              <v-btn @click="signOut()" color="error darken-1" class="ml-5 my-5"><v-icon>mdi-logout</v-icon> Çıkış Yap </v-btn>
             </v-col>
           </v-row>
           <!-- ./Log Out Button -->
@@ -44,7 +44,19 @@
 </template>
 
 <script>
+import firebase from 'firebase/app'
+import 'firebase/auth'
+
 export default {
+  methods: {
+    signOut () {
+      firebase.auth().signOut().then(function () {
+        this.$store.commit('signOut')
+      }).catch(function (error) {
+        console.log(error.message)
+      })
+    }
+  }
 
 }
 </script>

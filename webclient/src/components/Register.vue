@@ -19,13 +19,13 @@
                 </ul>
               </p>
                 <!--TODO: Email format check -->
-                <v-text-field label="E-posta" v-model="email"></v-text-field>
-                <v-text-field label="Ad" type="text" v-model="name"></v-text-field>
-                <v-text-field label="Soyad" type="text" v-model="surname"></v-text-field>
+                <v-text-field label="E-posta" v-model.trim="email"></v-text-field>
+                <v-text-field label="Ad" type="text" v-model.trim="name"></v-text-field>
+                <v-text-field label="Soyad" type="text" v-model.trim="surname"></v-text-field>
                 <birthdayPicker @birthdayDateChange="date = $event" />
-                <v-text-field label="Telefon No" placeholder="+90" type="text" v-model="phone_number"></v-text-field>
-                <v-text-field label="Parola" type="password" v-model="password"></v-text-field>
-                <v-text-field label="Parola tekrarı" type="password" v-model="password_re"></v-text-field>
+                <v-text-field label="Telefon No" placeholder="+90" type="text" v-model.trim="phone_number"></v-text-field>
+                <v-text-field label="Parola" type="password" v-model.trim="password"></v-text-field>
+                <v-text-field label="Parola tekrarı" type="password" v-model.trim="password_re"></v-text-field>
                 <!--TODO: Password strength check-->
                 <v-btn color="success darken-2" :loading="loading" type="submit" class="ml-5 my-5">
                     Kaydol <v-icon>mdi-account-check</v-icon>
