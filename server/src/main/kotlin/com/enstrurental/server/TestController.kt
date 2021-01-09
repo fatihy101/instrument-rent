@@ -16,5 +16,8 @@ class TestController {
     fun helloKotlin(): String {
         return "hello world"
     }
-
+    @GetMapping("")
+    fun index(): Mono<String> {
+        return Mono.just("Enstrurent Rest API is serving...")
+    }
 }
