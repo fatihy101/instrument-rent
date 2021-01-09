@@ -20,8 +20,6 @@
 </template>
 
 <script>
-import firebase from 'firebase/app'
-import 'firebase/auth'
 export default {
   name: 'Login',
   data: () => ({
@@ -30,19 +28,7 @@ export default {
     errors: []
   }),
   methods: {
-    async signInEvent () {
-      await firebase.auth().signInWithEmailAndPassword(this.email, this.password)
-        .catch(function (error) {
-          var errorCode = error.code
-          var errorMessage = error.message
-          if (errorCode === 'auth/wrong-password') {
-            alert('Wrong password.')
-          } else {
-            alert(errorMessage)
-          }
-          console.log(error)
-        })
-    },
+    // Function for dispatching items to Vuex
     login () {
       this.$store.dispatch('login', {
         email: this.email,
