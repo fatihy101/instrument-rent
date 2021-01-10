@@ -16,9 +16,9 @@
         <v-col :lg="show_sidebar ? 10 : 12" :md="show_sidebar ? 9 : 12"
         :sm="show_sidebar ? 8 : 12" :xs="show_sidebar ? 10 :12">
           <v-sheet dark
-            min-height="70vh"
+            min-height="45vh"
             rounded="lg"
-            class="mt-2 mx-2 d-flex justify-center"
+            class="mt-2 mx-2 d-flex justify-content"
             color="primary lighten-1"
             elevation="10" >
             <router-view></router-view>
@@ -58,8 +58,9 @@ export default {
 <style lang="scss">
 //To activate the purple background, uncomment. Remember <a> tags also purple.
 #main_view {
-  background-color:#450d82;
+  background-color:#C0B5AF;
   color: #fff;
+  background: linear-gradient(180deg, #3B3740 60%, #D9B54A 100%);
   }
 
   /* Enter and leave animations can use different */

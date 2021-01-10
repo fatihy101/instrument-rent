@@ -1,6 +1,7 @@
 <template>
   <v-card
-  color="primary"
+  light
+  color="secondary"
    class="mx-auto my-5 d-flex justify-center"
    height="325"
    min-width="500">

@@ -1,15 +1,16 @@
 <template>
    <v-footer
-      dark
+      light
       padless >
       <v-card
-      color="primary"
+      light
+        color="secondary"
         flat
         tile
         class="text-center flex"
       >
 
-      <v-card-text id="footer-text" class="white--text">
+      <v-card-text id="footer-text">
         {{ footer_text }}
       </v-card-text>
 
@@ -17,7 +18,7 @@
         <v-btn
           v-for="icon in icons"
           :key="icon"
-          class="mx-4 white--text"
+          class="mx-4"
           icon
         >
           <v-icon size="24px">
@@ -52,7 +53,7 @@ export default {
 
 <style lang="scss" scoped>
   .mute-text-footer{
-    color: #cfccd8;
+    color: #3B3740;
     display: inline;
     font-size: 14px;
   }

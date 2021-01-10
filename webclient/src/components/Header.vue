@@ -41,7 +41,7 @@
           <!-- Fab button -->
           <v-fab-transition>
               <v-btn
-                :color="show_sidebar ? 'accent darken-1' : 'secondary darken-2'"
+                :color="show_sidebar ? 'accent darken-1' : 'secondary darken-1'"
                 fab
                 absolute
                 left
