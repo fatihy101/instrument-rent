@@ -1,6 +1,6 @@
 <template>
   <transition name="slide">
-    <v-sheet v-if="!$store.getters.getLoginDisplay && !this.$store.getters.getLoggedIn" rounded="lg" class="d-flex justify-center mt-2" dark color="primary lighten-1" elevation="15">
+    <v-sheet v-if="!$store.getters.getLoginDisplay && !$store.getters.getLoggedIn" rounded="lg" class="d-flex justify-center mt-2" dark color="primary lighten-1" elevation="15">
       <v-container>
         <v-row dense>
           <v-col>
@@ -13,11 +13,13 @@
         <v-row>
           <v-col class="d-flex justify-center">
             <v-form lazy-validation @submit.prevent="register" class="mx-n5">
+              <!-- Error view -->
               <p v-if="errors.length"  style="color:pink; word-wrap:break-word;">
                 <ul style="list-style-type:none;">
                   <li v-for="(error, index) in errors" :key="index">{{ error }}</li>
                 </ul>
               </p>
+              <!-- /Error view -->
                 <!--TODO: Email format check -->
                 <v-text-field label="E-posta" v-model.trim="email"></v-text-field>
                 <v-text-field label="Ad" type="text" v-model.trim="name"></v-text-field>

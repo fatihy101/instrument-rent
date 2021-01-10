@@ -41,14 +41,14 @@
           <!-- Fab button -->
           <v-fab-transition>
               <v-btn
-                id="search_bar"
-                color="accent darken-2"
+                :color="show_sidebar ? 'accent darken-1' : 'secondary darken-1'"
                 fab
                 absolute
-                top
+                left
                 right
+                @click="changeSidebarStatus()"
               >
-                <v-icon>mdi-magnify</v-icon>
+                <v-icon>mdi-account</v-icon>
               </v-btn>
           </v-fab-transition>
           <!-- /Fab button -->
@@ -62,12 +62,27 @@
 export default {
   name: 'Header',
   data: () => ({
+    show_sidebar: true,
     menuItems: [
       { title: 'Ana Sayfa', path: '/', icon: 'mdi-home' },
       { title: 'Hakkımızda', path: '/hakkimizda', icon: 'mdi-information-outline' },
       { title: 'Nasıl çalışır?', path: '/nasil-calisir', icon: 'mdi-head-question-outline' }
     ]
-  })
+  }),
+  methods: {
+    changeSidebarStatus () {
+      this.show_sidebar = !this.show_sidebar
+      this.$emit('sidebarStatus', this.show_sidebar)
+    }
+  },
+  computed: {
+    fabColor () {
+      return {
+        'secondary darken-2': !this.show_sidebar,
+        'accent darken-1': this.show_sidebar
+      }
+    }
+  }
 
 }
 </script>

@@ -1,23 +1,24 @@
 <template>
   <v-app>
     <!-- TODO: remove hide-on-scroll. Make custom function to hide app-bar -->
-    <Header/>
+    <Header @sidebarStatus="show_sidebar = $event"/>
     <v-main id="main_view">
       <v-container fluid>
       <v-row>
         <!-- Sidebar -->
-        <v-col lg="2" md="3" sm="4" xs="1">
-          <Login @visibilityEvent="show_login = $event" :visibility="show_login"/>
-          <Register :visibility="!show_login"/>
+        <v-col v-if="show_sidebar" lg="2" md="3" sm="4" xs="2">
+          <Login/>
+          <Register/>
           <Profile/>
         </v-col>
         <!-- /Sidebar -->
         <!-- main sheet, view -->
-        <v-col lg="10" md="9" sm="8" xs="11">
+        <v-col :lg="show_sidebar ? 10 : 12" :md="show_sidebar ? 9 : 12"
+        :sm="show_sidebar ? 8 : 12" :xs="show_sidebar ? 10 :12">
           <v-sheet dark
-            min-height="70vh"
+            min-height="45vh"
             rounded="lg"
-            class="mt-2 mx-5 d-flex justify-center"
+            class="mt-2 mx-2 d-flex justify-content"
             color="primary lighten-1"
             elevation="10" >
             <router-view></router-view>
@@ -42,7 +43,7 @@ export default {
   name: 'App',
 
   data: () => ({
-    show_login: true
+    show_sidebar: true
   }),
   components: {
     Login,
@@ -57,8 +58,9 @@ export default {
 <style lang="scss">
 //To activate the purple background, uncomment. Remember <a> tags also purple.
 #main_view {
-  background-color:#450d82;
+  background-color:#C0B5AF;
   color: #fff;
+  background: linear-gradient(180deg, #3B3740 60%, #D9B54A 100%);
   }
 
   /* Enter and leave animations can use different */
