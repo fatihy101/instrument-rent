@@ -4,6 +4,7 @@ import org.bson.types.Binary
 import org.springframework.data.annotation.CreatedDate
 import org.springframework.data.annotation.Id
 import org.springframework.data.mongodb.core.mapping.Document
+import org.springframework.format.annotation.DateTimeFormat
 import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
@@ -13,8 +14,9 @@ data class Clients (
         @Id
         val id: String?,
         @CreatedDate
+        @DateTimeFormat(pattern = "dd.MM.yyyy")
         val registration_date: LocalDateTime? = LocalDateTime.now(),
-        val birthday_date: LocalDateTime,
+        val birthday_date: LocalDateTime?,
         var email: String?,
         var name: String?,
         var surname: String?,
