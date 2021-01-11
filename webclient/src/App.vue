@@ -6,7 +6,7 @@
       <v-container fluid>
       <v-row>
         <!-- Sidebar -->
-        <v-col v-if="show_sidebar" lg="2" md="3" sm="4" xs="2">
+        <v-col v-if="show_sidebar" lg="2" md="3" sm="4" xs="12">
           <Login/>
           <Register/>
           <Profile/>

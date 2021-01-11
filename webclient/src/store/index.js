@@ -10,8 +10,8 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     loginDisplay: true,
-    loggedIn: false,
-    userProfile: {}
+    loggedIn: true,
+    userProfile: { display_name: 'John Doey', shop_name: 'test' }
   },
   mutations: {
     changeLoginDisplay (state) {
@@ -46,13 +46,13 @@ export default new Vuex.Store({
         router.push('/')
       }).catch(err => console.log(err))
       // set user profile in state
-      // change route to dashboard
     }
   },
   modules: {
   },
   getters: {
     getLoginDisplay: state => state.loginDisplay,
-    getLoggedIn: state => state.loggedIn
+    getLoggedIn: state => state.loggedIn,
+    getUserProfile: state => state.userProfile
   }
 })
