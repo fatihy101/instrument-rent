@@ -29,7 +29,7 @@
                 <v-text-field label="Parola" type="password" v-model.trim="password"></v-text-field>
                 <v-text-field label="Parola tekrarı" type="password" v-model.trim="password_re"></v-text-field>
                 <!--TODO: Password strength check-->
-                <v-btn color="success darken-2" :loading="loading" type="submit" class="ml-5 my-5">
+                <v-btn color="secondary darken-1" :loading="loading" type="submit" class="ml-5 my-5">
                     Kaydol <v-icon>mdi-account-check</v-icon>
                 </v-btn>
             </v-form>

@@ -3,7 +3,7 @@
   light
   color="secondary"
    class="mx-auto mt-5 d-flex justify-center"
-   height="500"
+   min-height="510"
    max-width="400">
     <v-container>
         <v-row>
@@ -19,7 +19,8 @@
             <v-col>
                 <v-card-title>{{ instrument.name }}</v-card-title>
                 <p> {{ instrument.info }} </p>
-                <v-btn block color="primary darken-1">Kirala</v-btn>
+                <p><b> {{instrument.price}} TL </b></p>
+                <v-btn block color="primary darken-1"> {{ buttonText }}  </v-btn>
             </v-col>
         </v-row>
 
@@ -31,18 +32,12 @@
 <script>
 export default {
   name: 'instrumentCard',
-  data: () => ({
-    instrument: {
-      renter_public_uid: '',
-      photos: [],
-      name: 'Fender C100S',
-      info: 'Test ediliyor',
-      category: '',
-      shop_name: 'Test mağazası',
-      open_to_sell: null,
-      price: null
+  props: ['instrument'],
+  computed: {
+    buttonText () {
+      return this.instrument.open_to_sell ? 'Satın Al' : 'Kirala'
     }
-  })
+  }
 }
 </script>
 
