@@ -9,7 +9,7 @@
     <!-- /Toolbar -->
     <!-- Instrument cards -->
     <v-row >
-      <v-col v-for="instrument in instruments" :key="instrument.shop_name" lg="3" md="4" sm="6">
+      <v-col v-for="(instrument, index) in instruments" :key="index" lg="3" md="4" sm="6">
         <instrumentCard :instrument = "instrument"/>
       </v-col>
     </v-row>
