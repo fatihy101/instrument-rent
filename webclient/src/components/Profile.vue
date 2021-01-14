@@ -3,7 +3,7 @@
       <v-sheet v-if="this.$store.getters.getLoggedIn" rounded="lg" class="d-flex justify-center mt-2" dark color="secondary" elevation="15">
         <div class="justify-center">
           <!-- Profile Photo -->
-          <v-list color="primary" class="px-6">
+          <v-list color="primary" class="px-6" rounded>
             <v-list-item class="px-0">
               <v-list-item-avatar>
                 <v-img src="https://cdn.vuetifyjs.com/images/john.png"></v-img>
@@ -32,16 +32,26 @@
             v-model="selectedItem"
             color="primary"
             >
+              <!-- TODO: Get rid of the repetition of renter menu and client menu. -->
               <div v-if="$store.getters.getUserProfile.shop_name">
                 <!-- Renter menu -->
                 <v-list-item v-for="(menu_item, index) in renterMenuItems" :key="index" >
-                  <a> {{ menu_item.text }} </a>
+                  <!-- Item's icon -->
+                  <v-list-item-icon>
+                  <v-icon v-text="menu_item.icon" light />
+                  </v-list-item-icon>
+                  <!-- /Item's icon -->
+                  <v-list-item-content>
+                    <v-list-item-title style="color: black;"
+                    v-text="menu_item.text"/>
+                  </v-list-item-content>
                 </v-list-item>
                 <!-- /Renter menu -->
               </div>
               <div v-else>
                 <!-- Client menu -->
                 <v-list-item v-for="(menu_item, index) in clientMenuItems" :key="index">
+                  <v-icon v-text="menu_item.icon"></v-icon>
                   <v-btn text> {{ menu_item.text }} </v-btn>
                 </v-list-item>
                 <!-- /Client menu -->
@@ -69,15 +79,15 @@ export default {
   data: () => ({
     selectedItem: null,
     clientMenuItems: [
-      { text: 'Profilimi Görüntüle', path: '' }
+      { text: 'Profilimi Görüntüle', path: '', icon: 'mdi-account-circle' }
     ],
     renterMenuItems: [
-      { text: 'Mağaza Paneli', path: '' },
-      { text: 'Profili Görüntüle', path: '' },
-      { text: 'Ürün Ekle', path: '' },
-      { text: 'Ürünlerimi Görüntüle', path: '' },
-      { text: 'Gelen Siparişler', path: '' },
-      { text: 'Bekleyen Siparişler', path: '' }
+      { text: 'Mağaza Paneli', path: '', icon: 'mdi-view-dashboard' },
+      { text: 'Profili Görüntüle', path: '', icon: 'mdi-account-circle' },
+      { text: 'Ürün Ekle', path: '', icon: 'mdi-plus-box' },
+      { text: 'Ürünlerimi Görüntüle', path: '', icon: 'mdi-music-box-multiple' },
+      { text: 'Gelen Siparişler', path: '', icon: 'mdi-file' },
+      { text: 'Bekleyen Siparişler', path: '', icon: 'mdi-file-alert' }
     ]
   }),
   methods: {
@@ -98,6 +108,6 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss" scoped>
 
 </style>
