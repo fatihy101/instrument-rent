@@ -4,7 +4,7 @@
       <v-container>
         <v-row dense>
           <v-col>
-            <v-btn class="mb-3" icon color="primary" @click="$store.commit('changeLoginDisplay')">
+            <v-btn class="mb-3" icon color="primary" :disabled="loading" @click="$store.commit('changeLoginDisplay')">
               <v-icon color="accent"> mdi-arrow-left-thick </v-icon>
             </v-btn>
             <v-divider></v-divider>
@@ -61,6 +61,12 @@ export default {
     password_re: null
   }),
   methods: {
+    formatDate (date) {
+      var year = date.slice(0, 4)
+      var month = date.slice(5, 7)
+      var day = date.slice(8, 10)
+      return `${day}-${month}-${year}`
+    },
     async register () {
       this.loading = true
       if (this.checkForm()) {
@@ -72,7 +78,7 @@ export default {
         const data = {
           id: user.uid,
           email: this.email,
-          birthday_date: this.date,
+          birthday_date: this.formatDate(this.date),
           name: this.name,
           surname: this.surname,
           phone_number: this.phone_number

@@ -10,8 +10,8 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     loginDisplay: true,
-    loggedIn: true,
-    userProfile: { display_name: 'John Doey', shop_name: 'test' }
+    loggedIn: false,
+    userProfile: { display_name: 'John Doey', shop_name: 'test', email: 'test@gmail.com' }
   },
   mutations: {
     changeLoginDisplay (state) {
