@@ -1,9 +1,13 @@
 <template>
    <transition name="slide">
-      <v-sheet v-if="this.$store.getters.getLoggedIn" rounded="lg" class="d-flex justify-center mt-2" dark color="secondary" elevation="15">
+      <v-sheet v-if="this.$store.getters.getLoggedIn"
+      rounded="lg"
+      class="d-flex justify-center mt-2"
+      dark color="secondary"
+      elevation="15">
         <div class="justify-center">
           <!-- Profile Photo -->
-          <v-list color="primary" class="px-6" rounded>
+          <v-list color="primary" class="px-10">
             <v-list-item class="px-0">
               <v-list-item-avatar>
                 <v-img src="https://cdn.vuetifyjs.com/images/john.png"></v-img>
@@ -11,12 +15,12 @@
             </v-list-item>
             <!-- ./Profile Photo -->
             <!-- Name Surname or Shopname -->
-            <v-list-item link class="px-0">
+            <v-list-item link :class="currentEmail.length > 0 ? 'px-5' :  'px-10' ">
               <v-list-item-content>
                 <v-list-item-title class="title">
                   {{ displayName }}
                 </v-list-item-title>
-                <v-list-item-subtitle>john@domain.com</v-list-item-subtitle>
+                <v-list-item-subtitle> {{ currentEmail }} </v-list-item-subtitle>
               </v-list-item-content>
 
               <v-list-item-action>
@@ -27,7 +31,7 @@
           </v-list>
           <v-divider></v-divider>
          <!-- User Menu -->
-          <v-list nav dense color="secondary">
+          <v-list nav dense color="secondary" rounded>
             <v-list-item-group
             v-model="selectedItem"
             color="primary"
@@ -95,13 +99,16 @@ export default {
       firebase.auth().signOut().then(function () {
         this.$store.commit('signOut')
       }).catch(function (error) {
-        console.log(error.message)
+        console.log(`Error: ${error.message}`)
       })
     }
   },
   computed: {
     displayName () {
       return this.$store.getters.getUserProfile.display_name
+    },
+    currentEmail () {
+      return this.$store.getters.getUserProfile.email
     }
   }
 
