@@ -10,19 +10,20 @@ import reactor.core.publisher.Mono
 
 @RestController
 @RequestMapping("clients")
-@CrossOrigin(origins = ["http://localhost:8080"])
 class ClientsController(private val clientsRepository: ClientsRepository) {
 
     @GetMapping("/")
     fun getAllClients() : Flux<Clients> =  clientsRepository.findAll()
 
+    @CrossOrigin
     @GetMapping("/{clientId}")
     fun getClientById(@PathVariable clientId: String) : Mono<ResponseEntity<Clients>>{
         return clientsRepository.findById(clientId)
-                .map { client -> ResponseEntity.ok(client)}
-                .defaultIfEmpty(ResponseEntity.notFound().build())
+            .map { client -> ResponseEntity.ok(client)}
+            .defaultIfEmpty(ResponseEntity.notFound().build())
     }
 
+    @CrossOrigin
     @PostMapping("/save")
     fun saveClient(@RequestBody client: Clients) : Mono<ResponseEntity<Clients>> {
         return clientsRepository.save(client)
@@ -35,7 +36,7 @@ class ClientsController(private val clientsRepository: ClientsRepository) {
             .map { ResponseEntity.ok(" Client deleted. ID: $id")}
             .defaultIfEmpty(ResponseEntity.notFound().build())
 
-
+    @CrossOrigin
     @PutMapping("/{id}/update_phone/")
     fun updatePhoneNumber(@PathVariable id: String, @RequestBody client_updated: Clients) : Mono<ResponseEntity<Clients>>
     {
