@@ -51,10 +51,11 @@ export default new Vuex.Store({
 
     async fetchUserProfile ({ commit }, user) {
       // fetch user profile
-      await axios.get(`http://localhost:4001/clients/${user.uid}`).then(response => {
-        commit('setUserProfile', response.data)
+      await axios.get(`http://localhost:4001/all_users_types/${user.uid}`).then(userType => {
+        axios.get(`http://localhost:4001/${userType.data}/${user.uid}`).then(response => {
+          commit('setUserProfile', response.data)
+        }).catch(err => console.log(err))
       }).catch(err => console.log(err))
-      // set user profile in state
     }
   },
   modules: {
