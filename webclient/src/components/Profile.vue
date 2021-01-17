@@ -35,12 +35,14 @@
           <v-list nav dense color="secondary" rounded>
             <v-list-item-group
             v-model="selectedItem"
-            color="primary"
-            >
-              <!-- TODO: Get rid of the repetition of renter menu and client menu. -->
-              <div v-if="$store.getters.getUserProfile.shop_name">
-                <!-- Renter menu -->
-                <v-list-item v-for="(menu_item, index) in renterMenuItems" :key="index" >
+            color="primary" >
+              <!-- Menu -->
+              <router-link
+                class="no-underline"
+                v-for="(menu_item, index) in menu_items"
+                :key="index"
+                :to="menu_item.path" >
+                <v-list-item>
                   <!-- Item's icon -->
                   <v-list-item-icon>
                   <v-icon v-text="menu_item.icon" light />
@@ -51,16 +53,8 @@
                     v-text="menu_item.text"/>
                   </v-list-item-content>
                 </v-list-item>
-                <!-- /Renter menu -->
-              </div>
-              <div v-else>
-                <!-- Client menu -->
-                <v-list-item v-for="(menu_item, index) in clientMenuItems" :key="index">
-                  <v-icon v-text="menu_item.icon"></v-icon>
-                  <v-btn text> {{ menu_item.text }} </v-btn>
-                </v-list-item>
-                <!-- /Client menu -->
-              </div>
+              </router-link>
+              <!--  /Menu -->
             </v-list-item-group>
            <!-- Log Out Button -->
             <v-list-item>
@@ -82,6 +76,7 @@ import 'firebase/auth'
 
 export default {
   data: () => ({
+    menu_items: null,
     selectedItem: null,
     clientMenuItems: [
       { text: 'Profilimi Görüntüle', path: '', icon: 'mdi-account-circle-outline' }
@@ -89,7 +84,7 @@ export default {
     renterMenuItems: [
       { text: 'Mağaza Paneli', path: '', icon: 'mdi-view-dashboard' },
       { text: 'Profili Görüntüle', path: '', icon: 'mdi-account-circle' },
-      { text: 'Ürün Ekle', path: '', icon: 'mdi-plus-box' },
+      { text: 'Ürün Ekle', path: '/enstruman-ekle', icon: 'mdi-plus-box' },
       { text: 'Ürünlerimi Görüntüle', path: '', icon: 'mdi-music-box-multiple' },
       { text: 'Gelen Siparişler', path: '', icon: 'mdi-file' },
       { text: 'Bekleyen Siparişler', path: '', icon: 'mdi-file-alert' }
@@ -115,6 +110,11 @@ export default {
     profilePicture () {
       return this.$store.getters.getUserProfile.profile_picture
     }
+  },
+  mounted () {
+    // Logic: If shop_name exists, it's a renter else client.
+    if (this.$store.getters.getUserProfile.shop_name) this.menu_items = this.renterMenuItems
+    else this.menu_items = this.clientMenuItems
   }
 
 }

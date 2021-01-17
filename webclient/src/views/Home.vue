@@ -1,11 +1,7 @@
 <template>
   <v-container class="mb-10">
     <!-- Toolbar -->
-    <v-row>
-      <v-col>
         <homeToolbar />
-      </v-col>
-    </v-row>
     <!-- /Toolbar -->
     <!-- Instrument cards -->
     <v-row >

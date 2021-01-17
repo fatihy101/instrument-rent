@@ -4,6 +4,7 @@ import VueRouter from 'vue-router'
 // View Imports
 import Home from '../views/Home.vue'
 import About from '../views/About.vue'
+import AddInstrument from '../views/AddInstrument.vue'
 
 Vue.use(VueRouter)
 
@@ -17,6 +18,11 @@ const routes = [
     path: '/hakkimizda',
     name: 'About',
     component: About
+  },
+  {
+    path: '/enstruman-ekle',
+    name: 'AddInstrument',
+    component: AddInstrument
   }
 ]
 

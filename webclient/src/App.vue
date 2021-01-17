@@ -60,6 +60,9 @@ export default {
 </script>
 
 <style lang="scss">
+.no-underline {
+  text-decoration: none;
+}
 // To activate the purple background, uncomment. Remember <a> tags also purple.
 #main_view {
   background-color:#C0B5AF;
