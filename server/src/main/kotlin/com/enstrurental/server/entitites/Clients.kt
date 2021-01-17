@@ -1,5 +1,6 @@
 package com.enstrurental.server.entitites
 
+import com.fasterxml.jackson.annotation.JsonFormat
 import org.bson.types.Binary
 import org.springframework.data.annotation.CreatedDate
 import org.springframework.data.annotation.Id
@@ -14,9 +15,9 @@ data class Clients (
         @Id
         val id: String?,
         @CreatedDate
-        @DateTimeFormat(pattern = "dd.MM.yyyy")
         val registration_date: LocalDateTime? = LocalDateTime.now(),
-        val birthday_date: LocalDateTime?,
+        @JsonFormat(pattern = "dd-MM-yyyy")
+        var birthday_date: LocalDate?,
         var email: String?,
         var name: String?,
         var surname: String?,
