@@ -22,3 +22,6 @@ interface InstrumentsRepository: ReactiveMongoRepository<Instruments, String>{
 interface AddressesRepository: ReactiveMongoRepository<Addresses, Int>{
     fun findAddressesByUid(uid: String) : Flux<Addresses>
 }
+
+@Repository
+interface AllUsersRepository: ReactiveMongoRepository<AllUsers, String>
