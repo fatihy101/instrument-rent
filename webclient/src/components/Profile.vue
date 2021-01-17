@@ -10,7 +10,8 @@
           <v-list color="primary" class="px-10">
             <v-list-item class="px-0">
               <v-list-item-avatar>
-                <v-img src="https://cdn.vuetifyjs.com/images/john.png"></v-img>
+                <v-img v-if="profilePicture" src="profilePicture"></v-img>
+                <v-img v-else><v-icon size="50">mdi-account-circle</v-icon> </v-img>
               </v-list-item-avatar>
             </v-list-item>
             <!-- ./Profile Photo -->
@@ -18,7 +19,7 @@
             <v-list-item link :class="currentEmail.length > 0 ? 'px-5' :  'px-10' ">
               <v-list-item-content>
                 <v-list-item-title class="title">
-                  {{ displayName }}
+                  {{ displayFullname }}
                 </v-list-item-title>
                 <v-list-item-subtitle> {{ currentEmail }} </v-list-item-subtitle>
               </v-list-item-content>
@@ -83,7 +84,7 @@ export default {
   data: () => ({
     selectedItem: null,
     clientMenuItems: [
-      { text: 'Profilimi Görüntüle', path: '', icon: 'mdi-account-circle' }
+      { text: 'Profilimi Görüntüle', path: '', icon: 'mdi-account-circle-outline' }
     ],
     renterMenuItems: [
       { text: 'Mağaza Paneli', path: '', icon: 'mdi-view-dashboard' },
@@ -96,19 +97,23 @@ export default {
   }),
   methods: {
     signOut () {
+      const that = this
       firebase.auth().signOut().then(function () {
-        this.$store.commit('signOut')
+        that.$store.dispatch('signOut')
       }).catch(function (error) {
         console.log(`Error: ${error.message}`)
       })
     }
   },
   computed: {
-    displayName () {
-      return this.$store.getters.getUserProfile.display_name
+    displayFullname () {
+      return (`${this.$store.getters.getUserProfile.name} ${this.$store.getters.getUserProfile.surname}`)
     },
     currentEmail () {
       return this.$store.getters.getUserProfile.email
+    },
+    profilePicture () {
+      return this.$store.getters.getUserProfile.profile_picture
     }
   }
 

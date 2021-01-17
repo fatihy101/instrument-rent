@@ -3,7 +3,7 @@ import Vuex from 'vuex'
 import firebase from 'firebase/app'
 import 'firebase/auth'
 import axios from 'axios'
-import router from '../router/index'
+// import router from '../router/index'
 
 Vue.use(Vuex)
 
@@ -11,7 +11,7 @@ export default new Vuex.Store({
   state: {
     loginDisplay: true,
     loggedIn: false,
-    userProfile: { display_name: 'John Doey', shop_name: 'test', email: 'test@gmail.com' }
+    userProfile: { name: 'John', shop_name: 'test', email: 'test@gmail.com' }
   },
   mutations: {
     changeLoginDisplay (state) {
@@ -20,12 +20,19 @@ export default new Vuex.Store({
     signOut (state) {
       state.loggedIn = false
     },
+    logIn (state) {
+      state.loggedIn = true
+    },
     setUserProfile (state, val) {
       state.userProfile = val
       state.loggedIn = true
     }
   },
   actions: {
+    checkUser ({ commit }) {
+      if (firebase.auth().currentUser) commit('logIn')
+      else commit('signOut')
+    },
     changeLoginDisplay ({ commit }) {
       commit('changeLoginDisplay')
     },
@@ -34,16 +41,18 @@ export default new Vuex.Store({
     },
 
     async login ({ dispatch }, form) {
-      const user = await firebase.auth().signInWithEmailAndPassword(form.email, form.password)
-      dispatch('fetchUserProfile', user)
+      firebase.auth().signOut() // PRODUCTION LINE
+      await firebase.auth().signInWithEmailAndPassword(form.email, form.password)
+        .then(_ => {
+          var user = firebase.auth().currentUser
+          dispatch('fetchUserProfile', user)
+        }).catch(err => console.log('Error:' + err))
     },
 
     async fetchUserProfile ({ commit }, user) {
       // fetch user profile
       await axios.get(`http://localhost:4001/clients/${user.uid}`).then(response => {
-        console.log(`User profile: ${response} and data: ${response.data}`)
-        commit('setUserProfile', response.data())
-        router.push('/')
+        commit('setUserProfile', response.data)
       }).catch(err => console.log(err))
       // set user profile in state
     }

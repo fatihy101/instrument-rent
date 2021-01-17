@@ -51,12 +51,16 @@ export default {
     Footer,
     Register,
     Profile
+  },
+  mounted () {
+    // Check the Firebase.CurrentUser
+    this.$store.dispatch('checkUser')
   }
 }
 </script>
 
 <style lang="scss">
-//To activate the purple background, uncomment. Remember <a> tags also purple.
+// To activate the purple background, uncomment. Remember <a> tags also purple.
 #main_view {
   background-color:#C0B5AF;
   color: #fff;
