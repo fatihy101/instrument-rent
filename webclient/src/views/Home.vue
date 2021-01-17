@@ -1,15 +1,11 @@
 <template>
   <v-container class="mb-10">
     <!-- Toolbar -->
-    <v-row>
-      <v-col>
         <homeToolbar />
-      </v-col>
-    </v-row>
     <!-- /Toolbar -->
     <!-- Instrument cards -->
     <v-row >
-      <v-col v-for="(instrument, index) in instruments" :key="index" lg="3" md="4" sm="6">
+      <v-col v-for="(instrument, index) in instruments" :key="index" lg="4" md="4" sm="6">
         <instrumentCard :instrument = "instrument"/>
       </v-col>
     </v-row>

@@ -10,7 +10,8 @@
           <v-list color="primary" class="px-10">
             <v-list-item class="px-0">
               <v-list-item-avatar>
-                <v-img src="https://cdn.vuetifyjs.com/images/john.png"></v-img>
+                <v-img v-if="profilePicture" src="profilePicture"></v-img>
+                <v-img v-else><v-icon size="50">mdi-account-circle</v-icon> </v-img>
               </v-list-item-avatar>
             </v-list-item>
             <!-- ./Profile Photo -->
@@ -18,7 +19,7 @@
             <v-list-item link :class="currentEmail.length > 0 ? 'px-5' :  'px-10' ">
               <v-list-item-content>
                 <v-list-item-title class="title">
-                  {{ displayName }}
+                  {{ displayFullname }}
                 </v-list-item-title>
                 <v-list-item-subtitle> {{ currentEmail }} </v-list-item-subtitle>
               </v-list-item-content>
@@ -34,12 +35,14 @@
           <v-list nav dense color="secondary" rounded>
             <v-list-item-group
             v-model="selectedItem"
-            color="primary"
-            >
-              <!-- TODO: Get rid of the repetition of renter menu and client menu. -->
-              <div v-if="$store.getters.getUserProfile.shop_name">
-                <!-- Renter menu -->
-                <v-list-item v-for="(menu_item, index) in renterMenuItems" :key="index" >
+            color="primary" >
+              <!-- Menu -->
+              <router-link
+                class="no-underline"
+                v-for="(menu_item, index) in menu_items"
+                :key="index"
+                :to="menu_item.path" >
+                <v-list-item>
                   <!-- Item's icon -->
                   <v-list-item-icon>
                   <v-icon v-text="menu_item.icon" light />
@@ -50,16 +53,8 @@
                     v-text="menu_item.text"/>
                   </v-list-item-content>
                 </v-list-item>
-                <!-- /Renter menu -->
-              </div>
-              <div v-else>
-                <!-- Client menu -->
-                <v-list-item v-for="(menu_item, index) in clientMenuItems" :key="index">
-                  <v-icon v-text="menu_item.icon"></v-icon>
-                  <v-btn text> {{ menu_item.text }} </v-btn>
-                </v-list-item>
-                <!-- /Client menu -->
-              </div>
+              </router-link>
+              <!--  /Menu -->
             </v-list-item-group>
            <!-- Log Out Button -->
             <v-list-item>
@@ -81,14 +76,15 @@ import 'firebase/auth'
 
 export default {
   data: () => ({
+    menu_items: null,
     selectedItem: null,
     clientMenuItems: [
-      { text: 'Profilimi Görüntüle', path: '', icon: 'mdi-account-circle' }
+      { text: 'Profilimi Görüntüle', path: '', icon: 'mdi-account-circle-outline' }
     ],
     renterMenuItems: [
       { text: 'Mağaza Paneli', path: '', icon: 'mdi-view-dashboard' },
       { text: 'Profili Görüntüle', path: '', icon: 'mdi-account-circle' },
-      { text: 'Ürün Ekle', path: '', icon: 'mdi-plus-box' },
+      { text: 'Ürün Ekle', path: '/enstruman-ekle', icon: 'mdi-plus-box' },
       { text: 'Ürünlerimi Görüntüle', path: '', icon: 'mdi-music-box-multiple' },
       { text: 'Gelen Siparişler', path: '', icon: 'mdi-file' },
       { text: 'Bekleyen Siparişler', path: '', icon: 'mdi-file-alert' }
@@ -96,20 +92,29 @@ export default {
   }),
   methods: {
     signOut () {
+      const that = this
       firebase.auth().signOut().then(function () {
-        this.$store.commit('signOut')
+        that.$store.dispatch('signOut')
       }).catch(function (error) {
         console.log(`Error: ${error.message}`)
       })
     }
   },
   computed: {
-    displayName () {
-      return this.$store.getters.getUserProfile.display_name
+    displayFullname () {
+      return (`${this.$store.getters.getUserProfile.name} ${this.$store.getters.getUserProfile.surname}`)
     },
     currentEmail () {
       return this.$store.getters.getUserProfile.email
+    },
+    profilePicture () {
+      return this.$store.getters.getUserProfile.profile_picture
     }
+  },
+  updated () {
+    // Logic: If shop_name exists, it's a renter else client.
+    if (this.$store.getters.getUserProfile.shop_name) this.menu_items = this.renterMenuItems
+    else this.menu_items = this.clientMenuItems
   }
 
 }

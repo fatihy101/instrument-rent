@@ -4,7 +4,7 @@
   color="secondary"
    class="mx-auto mt-5 d-flex justify-center"
    min-height="510"
-   max-width="400">
+   width="400">
     <v-container>
         <v-row>
             <v-col>

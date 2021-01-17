@@ -84,7 +84,7 @@ export default {
           phone_number: this.phone_number
         }
         // Server
-        await axios.post('http://localhost:4001/clients/save', data, { timeout: 1000 })
+        await axios.post('http://localhost:4001/clients/save', data, { timeout: 4000 })
           .then((response) => {
             alert('Kaydınız başarıyla tamamlandı.')
             // To stop loading animation.
