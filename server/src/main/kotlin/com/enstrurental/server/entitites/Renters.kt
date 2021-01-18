@@ -12,16 +12,16 @@ data class Renters (
         val id: String?,
         @CreatedDate
         val registration_date: LocalDateTime? = LocalDateTime.now(),
-        val name: String?,
-        val surname: String?,
+        var name: String?,
+        var surname: String?,
         var email: String?,
         var info: String?,
         var shop_name: String?,
         var phone_number: String?,
         var shop_geolocation : Geolocation?, // TODO: Research the common type for geolocations in Kotlin or Java.
         var rating: Double?,
-        var profile_picture: Binary?,
-        var header_picture: Binary?
+        var profile_picture: String?,
+        var header_picture: String?
 )
 
 data class Geolocation(val lat: String, val long: String)

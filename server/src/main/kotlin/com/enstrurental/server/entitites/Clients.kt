@@ -22,5 +22,5 @@ data class Clients (
         var name: String?,
         var surname: String?,
         var phone_number: String?,
-        var profile_picture: Binary?
+        var profile_picture: String?
         )
