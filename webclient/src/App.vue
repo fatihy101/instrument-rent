@@ -67,7 +67,7 @@ export default {
 #main_view {
   background-color:#C0B5AF;
   color: #fff;
-  background: linear-gradient(180deg, #3B3740 60%, #D9B54A 100%);
+  background: linear-gradient(180deg, #25222A 60%, #D9B54A 100%);
   }
 
   /* Enter and leave animations can use different */
