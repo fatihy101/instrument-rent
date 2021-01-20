@@ -1,14 +1,14 @@
 <template>
   <v-slider class="mt-2" :disabled="is_disabled"
         persistent-hint
-        :hint="`En fazla ${value} gün kiralanabilir.`"
-        label="Maksimum kaç gün kiralanabilir?"
+        :hint="hint"
+        :label="label"
         color="secondary"
         :min="1"
-        :max="45"
+        :max="maxValue"
         v-model="value"
         :hide-details="is_disabled"
-        @change="$emit('maxDays', value)" >
+        @change="$emit('selectedVal', value)" >
         <template v-slot:append>
             <v-text-field
                 @change="checkVal()"
@@ -22,8 +22,8 @@
 
 <script>
 export default {
-  name: 'daySlider',
-  props: { is_disabled: Boolean },
+  name: 'themeSlider',
+  props: { is_disabled: Boolean, hint: String, label: String, maxValue: String },
   data: () => ({
     value: null
   }),

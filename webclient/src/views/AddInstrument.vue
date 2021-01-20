@@ -38,11 +38,18 @@
       </v-col>
       <v-divider vertical class="mx-5"></v-divider>
       <v-col  lg="2" md="2" sm="2">
-        <v-text-field label="Günlük Kira Bedeli" :disabled="!newInstrument.is_rental" append-icon="mdi-currency-try" ></v-text-field>
+        <v-text-field label="Günlük Kira Bedeli" v-model="newInstrument.daily_price"
+          @change="newInstrument.daily_price = formatToFloat(newInstrument.daily_price)"
+         :disabled="!newInstrument.is_rental"
+         append-icon="mdi-currency-try" ></v-text-field>
       </v-col>
       <v-divider vertical class="mx-5"></v-divider>
       <v-col>
-        <DaySlider :is_disabled="!newInstrument.is_rental" @maxDays="newInstrument.max_rental_days = $event" />
+        <ThemeSlider :is_disabled="!newInstrument.is_rental"
+         label="Maksimum kaç gün kiralanabilir?"
+         :hint="`En fazla ${newInstrument.max_rental_days} gün kiralanabilir.`"
+         maxValue = "45"
+         @selectedVal="newInstrument.max_rental_days = $event" />
       </v-col>
     <!-- /For rental -->
     </v-row>
@@ -53,9 +60,17 @@
         <v-checkbox label="Satışa Çıkar" class="mr-4" color="secondary" v-model="newInstrument.is_open_to_sell"></v-checkbox>
       </v-col>
       <v-divider vertical class="mx-5"></v-divider>
+      <v-col  lg="2" md="2" sm="2">
+        <v-text-field label="Birim Fiyatı" v-model="newInstrument.full_price"
+         @change="newInstrument.full_price = formatToFloat(newInstrument.full_price)"
+         append-icon="mdi-currency-try"
+         :disabled="!newInstrument.is_open_to_sell">
+        </v-text-field>
+      </v-col>
+      <v-divider vertical class="mx-5"></v-divider>
       <v-col>
-        <v-text-field label="Fiyat" v-model="newInstrument.full_price"
-         append-icon="mdi-currency-try" :disabled="!newInstrument.is_open_to_sell"></v-text-field>
+        <ThemeSlider label="Stoktaki Ürün Sayısı" v-model="newInstrument.quantity"
+        :is_disabled="!newInstrument.is_open_to_sell" @selectedVal="newInstrument.quantity = $event" />
       </v-col>
       <!-- /Expose for sale -->
     </v-row>
@@ -72,14 +87,14 @@
 </template>
 
 <script>
-import DaySlider from '../components/addInstrumentPage/DaySlider.vue'
+import ThemeSlider from '../components/addInstrumentPage/ThemeSlider.vue'
 import Dropdown from '../components/addInstrumentPage/Dropdown.vue'
 
 export default {
   name: 'AddInstrument',
   components: {
     Dropdown,
-    DaySlider
+    ThemeSlider
   },
   data: () => ({
     slider_val: 1,
@@ -94,10 +109,17 @@ export default {
       is_open_to_sell: false,
       max_rental_days: 1,
       daily_price: null,
-      full_price: null
+      full_price: null,
+      quantity: null
     }
   }),
   methods: {
+    formatToFloat (value) {
+      if (value.match(/[a-z]/i)) return 0
+      else if (value.includes(',')) return parseFloat(value.replace(',', '.')).toFixed(2)
+      else if (value % 1 === 0) return value
+      else return parseFloat(value).toFixed(2)
+    }
   }
 }
 </script>
