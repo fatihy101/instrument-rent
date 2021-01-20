@@ -1,5 +1,5 @@
 <template>
-  <v-container class="mb-10">
+  <v-container class="mb-10" fluid>
     <!-- Toolbar -->
         <homeToolbar />
     <!-- /Toolbar -->
