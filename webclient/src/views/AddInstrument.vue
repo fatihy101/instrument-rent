@@ -3,15 +3,8 @@
     <!-- Add Photos -->
     <v-row>
       <v-col v-for ="element in image_number" :key="element" class="d-flex justify-center">
-        <v-img
-        height="250"
-        max-width="30em"
-        style="border: 1px solid; background-color:#25222A">
-          <v-icon size="150px" class="center-item">mdi-plus</v-icon>
-          <p class="image-text">FOTOĞRAF EKLE</p>
-        </v-img>
+        <photo @value="image_number += $event" :image_number="image_number" />
       </v-col>
-      <!-- Max 4 photos, generate a box after uploading a photo. -->
     </v-row>
     <!-- /Add Photos -->
 
@@ -46,7 +39,7 @@
       <v-divider vertical class="mx-5"></v-divider>
       <v-col>
         <ThemeSlider :is_disabled="!newInstrument.is_rental"
-         label="Maksimum kaç gün kiralanabilir?"
+         label="En fazla kaç gün kiralanabilir?"
          :hint="`En fazla ${newInstrument.max_rental_days} gün kiralanabilir.`"
          maxValue = "45"
          @selectedVal="newInstrument.max_rental_days = $event" />
@@ -106,7 +99,7 @@
       </v-col>
       <v-divider vertical class="mx-5"></v-divider>
       <v-col>
-        <ThemeSlider label="Stoktaki Ürün Sayısı" v-model="newInstrument.stock_quantity"
+        <ThemeSlider label="Stoktaki Ürün Sayısı" v-model="newInstrument.stock_quantity" maxValue="100"
         :is_disabled="!newInstrument.is_open_to_sell" @selectedVal="newInstrument.stock_quantity = $event" />
       </v-col>
       <!-- /Expose for sale -->
@@ -147,7 +140,7 @@
     <v-row class="my-4">
       <v-col lg="4" md="0"></v-col>
       <v-col lg="4" md="12" sm="12">
-        <v-btn color="secondary" block style="color: black;" class="py-6">Onayla</v-btn>
+        <v-btn color="secondary" block style="color: black;" class="py-6" @click="showAll()">Onayla</v-btn>
       </v-col>
     </v-row>
     <!-- /Confirm Button -->
@@ -157,12 +150,14 @@
 <script>
 import ThemeSlider from '../components/addInstrumentPage/ThemeSlider.vue'
 import Dropdown from '../components/addInstrumentPage/Dropdown.vue'
+import photo from '../components/addInstrumentPage/Photo.vue'
 
 export default {
   name: 'AddInstrument',
   components: {
     Dropdown,
-    ThemeSlider
+    ThemeSlider,
+    photo
   },
   data: () => ({
     slider_val: 1,
@@ -201,19 +196,14 @@ export default {
       console.info(arg)
       if (arg === 'Sıfır') return false
       else return true
+    },
+    showAll () {
+      console.info(this.newInstrument.max_rental_days)
     }
   }
 }
 </script>
 
 <style lang = "scss" scoped>
-.center-item {
-  width: 100%;
-  margin-top: 10px;
-}
-.image-text {
-  text-align: center;
-  font-weight: 700;
-}
 
 </style>
