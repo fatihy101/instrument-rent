@@ -1,6 +1,8 @@
 <template>
     <v-combobox
           :label="label"
+          :multiple="multiple"
+          :chips="chips"
           hide-selected
           solo
           light
@@ -15,7 +17,7 @@
 <script>
 export default {
   name: 'dropdown',
-  props: { items: Array, label: String },
+  props: { items: Array, label: String, multiple: Boolean, chips: Boolean },
   data: () => ({
     selected: null
   }),

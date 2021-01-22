@@ -29,7 +29,7 @@
       <!-- /Brand, category, model -->
 
     </v-row>
-<!-- Todo: delivery types: special delivery or hands-on, used or not, recommended rent price according to its full price (if it's available), convert float prices, format hint of deposit -->
+<!-- Todo: recommended rent price according to its full price (if it's available), format hint of deposit -->
     <v-divider></v-divider>
     <v-row class="my-3 mx-4">
     <!-- For rental -->
@@ -58,7 +58,7 @@
    <transition name="slide">
     <v-row class="my-3 mx-4" v-if="newInstrument.is_rental">
       <v-col lg="2" md="2" sm="2">
-        <v-checkbox label="Depozito Alınsın mı?" hint="Ürün geri verildiğinde, hasar yoksa iade edilir." persistent-hint
+        <v-checkbox label="Depozito Alınsın mı?" @change="depositPrice()" hint="Ürün geri verildiğinde, hasar yoksa iade edilir." persistent-hint
         class="mr-4" color="secondary" v-model="newInstrument.is_deposit_required"></v-checkbox>
       </v-col>
       <v-divider vertical class="mx-5"></v-divider>
@@ -106,14 +106,14 @@
       </v-col>
       <v-divider vertical class="mx-5"></v-divider>
       <v-col>
-        <ThemeSlider label="Stoktaki Ürün Sayısı" v-model="newInstrument.quantity"
-        :is_disabled="!newInstrument.is_open_to_sell" @selectedVal="newInstrument.quantity = $event" />
+        <ThemeSlider label="Stoktaki Ürün Sayısı" v-model="newInstrument.stock_quantity"
+        :is_disabled="!newInstrument.is_open_to_sell" @selectedVal="newInstrument.stock_quantity = $event" />
       </v-col>
       <!-- /Expose for sale -->
     </v-row>
     <v-divider class="my-6"></v-divider>
 
-    <v-row class="mx-5">
+    <v-row class="mx-5 mt-4">
       <v-textarea
           v-model="newInstrument.info"
           label="Ürünün açıklaması"
@@ -122,10 +122,35 @@
           outlined
         ></v-textarea>
     </v-row>
-    <v-row class="mx-10 my-4">
-      <v-btn color="secondary darken-1" block style="color: black;">Onayla</v-btn>
+    <v-divider class="my-3"></v-divider>
+    <v-row class="mx-15 mt-5">
+      <!-- Is used -->
+      <v-col>
+        <Dropdown label="Sıfır mı?"
+         :items="['Sıfır', 'İkinci El']"
+         @selectedItem="newInstrument.is_used = isUsed($event)"
+        />
+      </v-col>
+      <!-- /Is used -->
+      <!-- Delivery types -->
+      <v-col>
+        <Dropdown
+         label="Teslimat Türlerini seçiniz. (Birden fazla seçim yapılabilir.)"
+         :chips="true"
+         :multiple="true"
+         @selectedItem="newInstrument.delivery_types = $event"
+         :items="['Mağazadan Teslim Alma', 'Özel Teslimat', 'Kargo']" />
+      </v-col>
+      <!-- /Delivery types -->
     </v-row>
-
+    <!-- Confirm Button -->
+    <v-row class="my-4">
+      <v-col lg="4" md="0"></v-col>
+      <v-col lg="4" md="12" sm="12">
+        <v-btn color="secondary" block style="color: black;" class="py-6">Onayla</v-btn>
+      </v-col>
+    </v-row>
+    <!-- /Confirm Button -->
   </v-container>
 </template>
 
@@ -157,7 +182,9 @@ export default {
       daily_price: null,
       full_price: null,
       deposit_price: null,
-      quantity: null
+      stock_quantity: null,
+      is_used: null,
+      delivery_types: []
     }
   }),
   methods: {
@@ -169,6 +196,11 @@ export default {
     },
     depositPrice () {
       this.newInstrument.deposit_price = this.deposit_multiplier * this.newInstrument.daily_price
+    },
+    isUsed (arg) {
+      console.info(arg)
+      if (arg === 'Sıfır') return false
+      else return true
     }
   }
 }
