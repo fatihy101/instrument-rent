@@ -115,6 +115,11 @@ export default {
     // Logic: If shop_name exists, it's a renter else client.
     if (this.$store.getters.getUserProfile.shop_name) this.menu_items = this.renterMenuItems
     else this.menu_items = this.clientMenuItems
+  },
+  mounted () {
+    // Logic: If shop_name exists, it's a renter else client.
+    if (this.$store.getters.getUserProfile.shop_name) this.menu_items = this.renterMenuItems
+    else this.menu_items = this.clientMenuItems
   }
 
 }
