@@ -2,8 +2,8 @@
   <v-container fluid>
     <!-- Add Photos -->
     <v-row>
-      <v-col v-for ="element in image_number" :key="element" class="d-flex justify-center">
-        <photo @value="image_number += $event" :image_number="image_number" />
+      <v-col v-for ="(element, index) in image_number" :key="index" class="d-flex justify-center">
+        <photo @value="image_number += $event" :image_number="image_number" :index_no ="index"/>
       </v-col>
     </v-row>
     <!-- /Add Photos -->
@@ -165,6 +165,7 @@ export default {
     deposit_multiplier: 1,
     category_items: ['Gitar', 'Elektro Gitar'],
     brands: ['Ibanez', 'Gibson', 'Fender'],
+    photos: [],
     newInstrument: {
       category: '',
       brand: '',
