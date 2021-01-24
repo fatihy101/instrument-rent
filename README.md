@@ -11,5 +11,5 @@ On-demand instrument renting platform repository.
 - Vue Routers
 - Vuex
 - Vuetify (CSS library)
-- Firebase (Note: Will be added )
-- SCSS (or SASS)
+- Firebase
+- SCSS
