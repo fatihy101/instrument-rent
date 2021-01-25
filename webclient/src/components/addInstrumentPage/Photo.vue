@@ -42,8 +42,11 @@ export default {
       }
     },
     onFileChange () {
-      this.selectedPhoto = event.target.files[0]
-      if (this.selectedPhoto) { // If photo isn't selected, don't run.
+      if (this.selectedPhoto) {
+        this.selectedPhoto = event.target.files[0]
+        this.url = URL.createObjectURL(this.selectedPhoto)
+      } else {
+        this.selectedPhoto = event.target.files[0]
         this.url = URL.createObjectURL(this.selectedPhoto)
         if (this.image_number < this.max_block) this.$emit('value', 1)
       }
