@@ -1,12 +1,28 @@
 <template>
   <v-container fluid>
-    <!-- Add Photos -->
     <v-row>
+    <!-- Add Photos -->
       <v-col v-for ="(element, index) in image_number" :key="index" class="d-flex justify-center">
-        <photo @value="image_number += $event" :image_number="image_number" :index_no ="index"/>
+        <photo @value="image_number += $event"
+        @getPhoto="addToArray($event)"
+        :image_number="image_number"
+        :index_no ="index"/>
       </v-col>
-    </v-row>
     <!-- /Add Photos -->
+    </v-row>
+    <v-row class="mt-4">
+    <!-- Photo warning -->
+      <v-col class="pr-0" lg="5">
+        <hr class="mt-2"/>
+      </v-col>
+      <v-col>
+        <small class="d-flex justify-center" style="color: #aaa;"> En fazla 4 fotoğraf eklenebilir</small>
+      </v-col>
+      <v-col class="pl-0" lg="5">
+        <hr class="mt-2"/>
+      </v-col>
+    <!-- /Photo warning -->
+    </v-row>
 
     <v-row class="mt-5 mx-5">
       <!-- Brand, category, model -->
@@ -140,7 +156,7 @@
     <v-row class="my-4">
       <v-col lg="4" md="0"></v-col>
       <v-col lg="4" md="12" sm="12">
-        <v-btn color="secondary" block style="color: black;" class="py-6" @click="showAll()">Onayla</v-btn>
+        <v-btn color="secondary" block style="color: black;" class="py-6">Onayla</v-btn>
       </v-col>
     </v-row>
     <!-- /Confirm Button -->
@@ -198,8 +214,18 @@ export default {
       if (arg === 'Sıfır') return false
       else return true
     },
-    showAll () {
-      console.info(this.newInstrument.max_rental_days)
+    addToArray (photoObject) {
+      let isObjectAvailable = false
+      for (let i = 0; i < this.photos.length; i++) {
+        // Is photoObject already exist in the array?
+        if (this.photos[i].ref_id === photoObject.ref_id) {
+          // if exists, change bool and change the old photo with new one.
+          isObjectAvailable = true
+          this.photos[0].photo = photoObject.photo
+        }
+      }
+      // if not exists (basically it stays 'false'), then add to array.
+      if (!isObjectAvailable) this.photos.push(photoObject)
     }
   }
 }
