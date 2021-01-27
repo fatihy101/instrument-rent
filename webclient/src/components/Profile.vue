@@ -9,10 +9,16 @@
           <!-- Profile Photo -->
           <v-list color="primary" class="px-10">
             <v-list-item class="px-0">
-              <v-list-item-avatar>
-                <v-img v-if="profilePicture" src="profilePicture"></v-img>
-                <v-img v-else><v-icon size="50">mdi-account-circle</v-icon> </v-img>
-              </v-list-item-avatar>
+              <v-badge
+               avatar
+               overlap
+               color="error"
+               :icon=" showBadge">
+                <v-list-item-avatar class="mx-0 my-0">
+                  <v-img v-if="profilePicture" src="profilePicture"></v-img>
+                  <v-img v-else><v-icon size="50">mdi-account-circle</v-icon> </v-img>
+                </v-list-item-avatar>
+              </v-badge>
             </v-list-item>
             <!-- ./Profile Photo -->
             <!-- Name Surname or Shopname -->
@@ -82,7 +88,7 @@ export default {
       { text: 'Profilimi Görüntüle', path: '', icon: 'mdi-account-circle-outline' }
     ],
     renterMenuItems: [
-      { text: 'Mağaza Paneli', path: '', icon: 'mdi-view-dashboard' },
+      { text: 'Mağaza Paneli', path: '', icon: 'mdi-storefront' },
       { text: 'Profili Görüntüle', path: '', icon: 'mdi-account-circle' },
       { text: 'Ürün Ekle', path: '/enstruman-ekle', icon: 'mdi-plus-box' },
       { text: 'Ürünlerimi Görüntüle', path: '', icon: 'mdi-music-box-multiple' },
@@ -109,6 +115,9 @@ export default {
     },
     profilePicture () {
       return this.$store.getters.getUserProfile.profile_picture
+    },
+    showBadge () {
+      return this.$store.getters.getUserProfile.shop_name ? 'Mağaza' : ''
     }
   },
   updated () {

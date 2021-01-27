@@ -80,7 +80,7 @@
         label="Depozito tutarı"
         color="secondary"
         :min="1"
-        :max="10"
+        :max="20"
         v-model="deposit_multiplier"
         :hide-details="!newInstrument.is_deposit_required"
         @change="depositPrice()" >
