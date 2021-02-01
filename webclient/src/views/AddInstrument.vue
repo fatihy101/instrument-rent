@@ -152,18 +152,21 @@
       </v-col>
       <!-- /Delivery types -->
     </v-row>
-    <!-- Confirm Button -->
+    <!-- Submit Button -->
     <v-row class="my-4">
       <v-col lg="4" md="0"></v-col>
       <v-col lg="4" md="12" sm="12">
-        <v-btn color="secondary" block style="color: black;" class="py-6">Onayla</v-btn>
+        <SubmitButton
+        :productInformation="newInstrument"
+        :photos="photos" />
       </v-col>
     </v-row>
-    <!-- /Confirm Button -->
+    <!-- /Submit Button -->
   </v-container>
 </template>
 
 <script>
+import SubmitButton from '../components/addInstrumentPage/SubmitButton.vue'
 import ThemeSlider from '../components/addInstrumentPage/ThemeSlider.vue'
 import Dropdown from '../components/addInstrumentPage/Dropdown.vue'
 import photo from '../components/addInstrumentPage/Photo.vue'
@@ -173,7 +176,8 @@ export default {
   components: {
     Dropdown,
     ThemeSlider,
-    photo
+    photo,
+    SubmitButton
   },
   data: () => ({
     slider_val: 1,
