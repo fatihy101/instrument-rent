@@ -44,6 +44,8 @@
 
 <script>
 // import axios from 'axios'
+import cryptoRandomString from 'crypto-random-string'
+
 export default {
   name: 'SubmitButton',
   props: { productInformation: Object, photos: Array },
@@ -54,6 +56,14 @@ export default {
   }),
   methods: {
     async sendData (product) {
+      // Assign a random id.
+      product.id = cryptoRandomString({ length: 15, type: 'alphanumeric' })
+      // Assign ids to photos.
+      for (let i = 0; i < this.photos.length; i++) {
+        const tempId = product.id + i
+        this.photos[i].ref_id = tempId
+        product.photo_ids.push(tempId)
+      }
       // TODO: Send data through the Axios.
       // await axios.post("http://localhost:4001/product/")
     },

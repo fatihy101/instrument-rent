@@ -187,6 +187,7 @@ export default {
     brands: ['Ibanez', 'Gibson', 'Fender'],
     photos: [],
     newInstrument: {
+      id: '',
       category: '',
       brand: '',
       model: '',
@@ -200,7 +201,8 @@ export default {
       deposit_price: null,
       stock_quantity: null,
       is_used: null,
-      delivery_types: []
+      delivery_types: [],
+      photo_ids: []
     }
   }),
   methods: {
@@ -214,7 +216,6 @@ export default {
       this.newInstrument.deposit_price = this.deposit_multiplier * this.newInstrument.daily_price
     },
     isUsed (arg) {
-      console.info(arg)
       if (arg === 'Sıfır') return false
       else return true
     },

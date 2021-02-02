@@ -53,8 +53,8 @@ export default {
     Profile
   },
   mounted () {
-    // Check the Firebase.CurrentUser
-    this.$store.dispatch('checkUser')
+    // Check the Firebase.CurrentUser DEACTIVATED FOR DEV.
+    // this.$store.dispatch('checkUser')
   }
 }
 </script>
