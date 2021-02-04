@@ -1,6 +1,5 @@
 package com.enstrurental.server.entitites
 
-import org.bson.types.Binary
 import org.springframework.data.mongodb.repository.ReactiveMongoRepository
 import org.springframework.stereotype.Repository
 import reactor.core.publisher.Flux
